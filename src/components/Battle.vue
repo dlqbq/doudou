@@ -2,7 +2,7 @@
 import { ref, getCurrentInstance, watch } from 'vue'
 import { useDoudouStore } from "@/stores/DoudouStore";
 
-const baseUrl = ref(import.meta.env.BASE_URL)
+const baseUrl = ref(`${import.meta.env.BASE_URL}${import.meta.env.VITE_ASSETS_PATH}`)
 const app = getCurrentInstance()
 const doudouStore = useDoudouStore()
 const { send } = app.proxy.$peer
@@ -143,7 +143,7 @@ const unwatchLocked = watch(
         <div class="battle-field">
             <div class="player-container">
                 <div class="player-img player1"
-                    :style="{ 'background-image': `url(${baseUrl}src/assets/images/${doudouStore.role}_${doudouStore.currentSkill ? doudouStore.currentSkill.type : 'stand'}.gif)` }">
+                    :style="{ 'background-image': `url(${baseUrl}assets/images/${doudouStore.role}_${doudouStore.currentSkill ? doudouStore.currentSkill.type : 'stand'}.gif)` }">
                     <div class="actions" v-if="doudouStore.currentSkill || doudouStore.locked">
                         <div class="lock-skill" v-if="!doudouStore.locked">
                             <button class="btn lock-skill-button" @click="lockSkill">锁定</button>
@@ -155,7 +155,7 @@ const unwatchLocked = watch(
             </div>
             <div class="player-container">
                 <div class="player-img player2"
-                    :style="{ 'background-image': `url(${baseUrl}src/assets/images/wukong_${doudouStore.locked && doudouStore.rivalSkill ? doudouStore.rivalSkill.type : 'stand'}.gif)` }">
+                    :style="{ 'background-image': `url(${baseUrl}assets/images/wukong_${doudouStore.locked && doudouStore.rivalSkill ? doudouStore.rivalSkill.type : 'stand'}.gif)` }">
                     <div class="card skill-card" v-if="doudouStore.rivalSkill">
                         {{ doudouStore.locked ? doudouStore.rivalSkill.name : '已锁定' }}
                     </div>
