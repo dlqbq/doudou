@@ -6,7 +6,7 @@ import Prepare from "@/components/Prepare.vue";
 import Result from "@/components/Result.vue";
 
 const routes = [
-    { path: '/', component: Battle },
+    { path: '/', component: Lobby },
     { path: '/prepare', component: Prepare },
     { path: '/battle', component: Battle },
     { path: '/result', component: Result },
