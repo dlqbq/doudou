@@ -1,93 +1,16 @@
-<!DOCTYPE html>
-<html>
+<!doctype html>
+<html lang="en">
 
 <head>
-    <title>豆豆斗斗</title>
-    <link rel="shortcut icon" href="/favicon.ico">
-    <link rel="stylesheet" href="css/reset.css" />
-    <link rel="stylesheet" href="css/game.css" />
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.ico" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Vite + Vue</title>
 </head>
 
 <body>
-    <div id="app">
-        <div class="global-loading" v-if="isShowMessage">
-            <div class="global-message">{{message}}</div>
-        </div>
-        <audio class="audio-bgm" muted="false" controls="false" autoplay="false" loop="true"
-            src="/doudou/audios/bgm.wav"></audio>
-        <div class="view lobby-view" v-if="isViewShow('lobby')">
-            <div class="actions">
-                <!-- <div class="action-holder">
-                    <button @click="startBattle" class="button start-battle">进入游戏</button>
-                </div> -->
-                <div class="action-holder">
-                    <button @click="createBattle" class="button create-battle">创建战场</button>
-                </div>
-                <div class="action-holder">
-                    <input name="hostId" v-model="hostId" class="host-id-input" placeholder="请输入主机ID" />
-                    <button @click="joinBattle" class="button join-battle">加入战场</button>
-                </div>
-            </div>
-        </div>
-        <div class="view battle-view" v-if="isViewShow('battle')">
-            <div class="status-bar">
-                <div class="energy">能量: <span class="current-energy">{{currentEnergy}}</span></div>
-            </div>
-            <div class="battle-field">
-                <div class="player-container">
-                    <div class="player-img player1"
-                        v-bind:style="{ 'background-image': 'url(images/wukong_' + currentSkillType + '.gif)' }">
-                        <div class="actions" v-if="currentSkill || locked">
-                            <div class="lock-skill" v-if="!locked">
-                                <button class="button lock-skill-button" @click="lockSkill">锁定</button>
-                            </div>
-                        </div>
-                        <div class="card skill-card" v-if="currentSkill">{{currentSkill.name}}</div>
-                    </div>
-                </div>
-                <div class="player-container">
-                    <div class="player-img player2"
-                        v-bind:style="{ 'background-image': 'url(images/wukong_' + rivalSkillType + '.gif)' }">
-                        <div class="card skill-card" v-if="rivalSkill">{{rivalSkill.name}}</div>
-                    </div>
-                </div>
-            </div>
-            <div class="card-pool">
-                <div class="card" v-if="!locked" v-for="skill in skills" @click="onCardClick(skill)"
-                    :data-skill-id="skill.id">
-                    {{skill.name}}
-                </div>
-                <!-- <div class="card card-doudou" data-skill="doudou" data-skill-name="豆豆">豆豆</div>
-                <div class="card card-feibiao" data-skill="feibiao" data-skill-name="飞镖">飞镖</div>
-                <div class="card card-shuangfei" data-skill="shuangfei" data-skill-name="双飞">双飞</div>
-                <div class="card card-pufang" data-skill="pufang" data-skill-name="普通防御">普通防御</div>
-                <div class="card card-yueye" data-skill="yueye" data-skill-name="越野">越野</div> -->
-            </div>
-        </div>
-        <div class="view result-view" v-if="isViewShow('result')">
-            <div class="battle-field">
-                <div class="player-container">
-                    <div class="player-img player1"
-                        v-bind:style="{ 'background-image': 'url(images/wukong_' + currentSkillType + '.gif)' }">
-                    </div>
-                </div>
-                <div class="player-container">
-                    <div class="player-img player2"
-                        v-bind:style="{ 'background-image': 'url(images/wukong_' + rivalSkillType + '.gif)' }">
-                        <div class="card skill-card" v-if="rivalSkill">{{rivalSkill.name}}</div>
-                    </div>
-                </div>
-            </div>
-            <div class="actions">
-                <div class="action-holder">
-                    <button class="button start-battle" @click="startBattle">再来一局</button>
-                </div>
-            </div>
-        </div>
-    </div>
-    <script src="https://unpkg.com/vue@3.4.27/dist/vue.global.prod.js"></script>
-    <script src="https://unpkg.com/peerjs@1.5.4/dist/peerjs.min.js"></script>
-    <script src="js/game.js"></script>
+    <div id="app"></div>
+    <script type="module" src="/src/main.js"></script>
 </body>
 
 </html>
