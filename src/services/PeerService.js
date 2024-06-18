@@ -37,6 +37,14 @@ const createPeer = () => {
     const conClose = () => doudouStore.status = 9
 
     const peerOpen = id => {
+        // Workaround for peer.reconnect deleting previous id
+        if (peer.id === null) {
+            console.log('Received null id from peer open');
+            peer.id = lastPeerId;
+        } else {
+            lastPeerId = peer.id;
+        }
+        
         doudouStore.peerId = id
         doudouStore.status = 1
 
