@@ -10,6 +10,7 @@ const createPeer = () => {
     let conn = null
     let isHost = true
     let hostId = null
+    let lastPeerId = null;
 
     const conOpen = () => {
         doudouStore.status = 6
@@ -64,6 +65,11 @@ const createPeer = () => {
     }
     const peerDisconnected = currentId => {
         doudouStore.status = 3
+        
+        // Workaround for peer.reconnect deleting previous id
+        peer.id = lastPeerId;
+        peer._lastServerId = lastPeerId;
+        peer.reconnect();
     }
     const peerError = err => {
         console.log(err)
