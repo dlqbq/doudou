@@ -75,7 +75,7 @@ const createPeer = () => {
         doudouStore.status = 3
         
         // Workaround for peer.reconnect deleting previous id
-        peer.id = lastPeerId;
+        // peer.id = lastPeerId;
         peer._lastServerId = lastPeerId;
         peer.reconnect();
     }
