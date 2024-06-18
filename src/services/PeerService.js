@@ -76,7 +76,10 @@ const createPeer = () => {
         if (peer) {
             peer.disconnect()
         }
-        peer = new Peer(null, { debug: 3 })
+        peer = new Peer(null, {
+            pingInterval: 50000,
+            debug: 3
+        })
 
         peer.on('open', peerOpen)
         peer.on('connection', peerConnection)
