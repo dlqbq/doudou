@@ -3,6 +3,7 @@
         <GlobalMessage>
             <button @click="backToLobby">返回大厅</button>
         </GlobalMessage>
+        <!-- <SkillAnimation debug="true" role="wukong" :skill="1"></SkillAnimation> -->
         <RouterView></RouterView>
     </div>
 </template>
@@ -12,6 +13,7 @@ import { watch, getCurrentInstance, onMounted } from 'vue';
 import { useDoudouStore } from '@/stores/DoudouStore'
 import { useRouter } from 'vue-router'
 import GlobalMessage from '@/components/GlobalMessage.vue';
+import SkillAnimation from '@/components/SkillAnimation.vue';
 const app = getCurrentInstance()
 const { disconnect, send } = app.proxy.$peer
 const router = useRouter()

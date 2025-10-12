@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+</head>
+
+<body>
+    <style>
+        html,
+        body {
+            width: 100%;
+            height: 100%;
+            padding: 0;
+            margin: 0;
+        }
+
+        .wrapper {
+            width: 100%;
+            height: 100%;
+            min-height: 100%;
+            background-color: rgb(39, 138, 0);
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: space-around;
+        }
+
+        .player {
+            width: 190px;
+            height: 220px;
+            position: relative;
+            background-image: url(/src/assets/images/wukong_stand.gif);
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: contain;
+        }
+
+        .player2 {
+            width: 190px;
+            height: 220px;
+            position: relative;
+            background-image: url(/src/assets/images/wukong_stand.gif);
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: contain;
+            transform: rotateY(180deg);
+        }
+
+        .skill {
+            width: 190px;
+            height: 50px;
+            position: absolute;
+            background-image: url(/src/assets/images/bullets.gif);
+            background-position: -375px -292px;
+            background-repeat: no-repeat;
+            background-size: auto;
+            border-radius: 30px;
+        }
+
+        .skill.skill-active {
+            display: block;
+            animation-duration: 1.5s;
+            animation-name: skill;
+            animation-delay: 0s;
+            animation-fill-mode: forwards;
+            animation-iteration-count: infinite;
+            background-image: url(/src/assets/images/explode.gif);
+        }
+
+        @keyframes skill {
+            0% {
+                right: 70%;
+                filter: opacity(1);
+                width: 190px;
+                height: 50px;
+                background-image: url(/src/assets/images/bullets.gif);
+                background-position: -375px -292px;
+            }
+
+            65% {
+                right: 20%;
+                filter: opacity(1);
+                width: 190px;
+                height: 50px;
+                background-image: url(/src/assets/images/bullets.gif);
+                background-position: -375px -292px;
+            }
+
+            70% {
+                right: 20%;
+                filter: opacity(1);
+                width: 267px;
+                height: 252px;
+                background-image: url(/src/assets/images/explode.gif);
+                background-position: -77px -81px;
+            }
+
+            100% {
+                right: 20%;
+                width: 267px;
+                height: 252px;
+                background-image: url(/src/assets/images/explode.gif);
+                background-position: -77px -81px;
+            }
+        }
+    </style>
+    <div class="wrapper">
+        <div class="player"></div>
+        <div class="player2"></div>
+        <div class="skill skill-active"></div>
+    </div>
+</body>
+
+</html>

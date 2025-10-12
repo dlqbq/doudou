@@ -8,6 +8,7 @@ const doudouStore = useDoudouStore()
 const { send } = app.proxy.$peer
 
 const ready = () => {
+    doudouStore.initBattle()
     doudouStore.status = 10
     send({ status: 10 })
 }

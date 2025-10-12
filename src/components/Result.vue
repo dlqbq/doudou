@@ -26,8 +26,4 @@ const backLobby = () => {
     <button @click="backLobby">返回大厅</button>
 </template>
 
-<style scoped>
-.read-the-docs {
-    color: #888;
-}
-</style>
+<style scoped></style>

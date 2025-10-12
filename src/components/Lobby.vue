@@ -1,13 +1,14 @@
 <script setup>
-import { ref, getCurrentInstance } from 'vue'
+import { ref, getCurrentInstance, onMounted, nextTick } from 'vue'
 import { useDoudouStore } from "@/stores/DoudouStore";
 
 defineProps({
     msg: String,
 })
+const baseUrl = ref(`${import.meta.env.BASE_URL}${import.meta.env.VITE_ASSETS_PATH}`)
 const app = getCurrentInstance()
 const hostId = ref('')
-const skill = ref(0)
+const hostIdInput = ref(null)
 const isShowHostInput = ref(false)
 const doudouStore = useDoudouStore()
 const { create, connect } = app.proxy.$peer
@@ -24,6 +25,9 @@ const joinBattle = () => {
 const showHostInput = () => {
     hostId.value = ''
     isShowHostInput.value = true
+    nextTick(() => {
+        hostIdInput.value && hostIdInput.value.focus()
+    })
 }
 const cancelJoin = () => {
     isShowHostInput.value = false
@@ -40,7 +44,7 @@ const cancelJoin = () => {
         </div>
         <div class="input-host-id" v-if="isShowHostInput">
             <div class="input-host-id-box">
-                <input name="hostId" v-model="hostId" class="host-id-input" placeholder="请输入主机ID" />
+                <input name="hostId" v-model="hostId" class="host-id-input" placeholder="请输入主机ID" ref="hostIdInput" />
                 <div class="action-layout">
                     <button class="btn join-battle-btn" @click="joinBattle">加入</button>
                     <button class="btn cancel-btn" @click="cancelJoin">取消</button>

@@ -189,7 +189,7 @@ export const useDoudouStore = defineStore('doudou', {
             rivalSkillId: 0,
             rivalFlowerUsed: false,
 
-            isBgmMuted: false,
+            isBgmMuted: true,
             isSoundMuted: false,
 
 
@@ -205,6 +205,7 @@ export const useDoudouStore = defineStore('doudou', {
             let message = ''
             switch (state.status) {
                 case 0:
+                case 5:
                     message = state.isHost ? '创建中, 请稍候...' : '加入中，请稍候...'
                     break;
                 case 1:
@@ -221,9 +222,9 @@ export const useDoudouStore = defineStore('doudou', {
                 case 7:
                     message = `连接出错，请重新开始 :(`
                     break;
-                case 5:
-                    message = `连接已关闭，请重新开始！`
-                    break;
+                // case 5:
+                //     // message = `连接已关闭，重新开始！`
+                //     break;
                 case 6:
                     message = `已连接，准备战斗！`
                     break;

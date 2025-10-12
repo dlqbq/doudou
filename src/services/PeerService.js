@@ -44,7 +44,7 @@ const createPeer = () => {
         } else {
             lastPeerId = peer.id;
         }
-        
+
         doudouStore.peerId = id
         doudouStore.status = 1
 
@@ -73,7 +73,7 @@ const createPeer = () => {
     }
     const peerDisconnected = currentId => {
         doudouStore.status = 3
-        
+
         // Workaround for peer.reconnect deleting previous id
         // peer.id = lastPeerId;
         peer._lastServerId = lastPeerId;
@@ -119,6 +119,8 @@ const createPeer = () => {
         doudouStore.peerId = ''
         conn && conn.close()
         peer && peer.disconnect()
+        peer && peer.destroy()
+        peer = null
     }
 
     return {

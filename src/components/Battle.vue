@@ -1,11 +1,29 @@
 <script setup>
-import { ref, getCurrentInstance, watch } from 'vue'
+import { ref, getCurrentInstance, watch, onMounted, onUnmounted } from 'vue'
 import { useDoudouStore } from "@/stores/DoudouStore";
 
-const baseUrl = ref(`${import.meta.env.BASE_URL}${import.meta.env.VITE_ASSETS_PATH}`)
+const baseUrl = `${import.meta.env.BASE_URL}${import.meta.env.VITE_ASSETS_PATH}`
 const app = getCurrentInstance()
 const doudouStore = useDoudouStore()
 const { send } = app.proxy.$peer
+
+const magicAudio = ref(null)
+const playMagicAudio = () => {
+    magicAudio.value.muted = false
+    magicAudio.value.play()
+}
+const bgm = ref(null)
+const toggleBgm = () => {
+    if (doudouStore.isBgmMuted) {
+        bgm.value.muted = false
+        bgm.value.play()
+        doudouStore.isBgmMuted = false
+    } else {
+        bgm.value.muted = true
+        bgm.value.pause()
+        doudouStore.isBgmMuted = true
+    }
+}
 
 const onCardClick = skill => doudouStore.currentSkillId = skill.id
 
@@ -66,8 +84,8 @@ const preJudge = () => {
     }
 }
 
-
 const finalJudge = () => {
+    playMagicAudio()
     let energy = doudouStore.currentSkill.energy
     if (doudouStore.currentSkill.id === 15) {
         doudouStore.setFlowerUsed(true)
@@ -109,6 +127,7 @@ const unwatchRivalSkillId = watch(
     newValue => {
         if (
             doudouStore.locked &&
+            doudouStore.status !== 13 &&
             newValue > 0
         ) {
             finalJudge()
@@ -118,12 +137,12 @@ const unwatchRivalSkillId = watch(
 }
 )
 
-
 const unwatchLocked = watch(
     () => doudouStore.locked,
     newValue => {
         if (newValue) {
             if (
+                doudouStore.status !== 13 &&
                 doudouStore.rivalSkillId > 0
             ) {
                 finalJudge()
@@ -133,11 +152,18 @@ const unwatchLocked = watch(
     immediate: true
 }
 )
+
+onUnmounted(() => {
+
+})
 </script>
 
 <template>
     <div class="battle-layout">
         <div class="status-bar">
+            <audio :src="`${baseUrl}assets/audios/bgm.mp3`" style="display: none;" ref="bgm" loop="true"></audio>
+            <audio :src="`${baseUrl}assets/audios/magic.mp3`" style="display: none;" ref="magicAudio"></audio>
+            <button @click="toggleBgm">toggle bgm</button>
             <div class="energy">能量: <span class="current-energy">{{ doudouStore.currentEnergy }}</span></div>
         </div>
         <div class="battle-field">
@@ -150,6 +176,9 @@ const unwatchLocked = watch(
                         </div>
                     </div>
                     <div class="card skill-card" v-if="doudouStore.currentSkill">{{ doudouStore.currentSkill.name }}
+                    </div>
+                    <div class="skill"
+                        :class="`${doudouStore.locked && doudouStore.currentSkillId !== 0 && doudouStore.rivalSkillId !== 0 ? 'skill-active' : ''}`">
                     </div>
                 </div>
             </div>
@@ -255,8 +284,9 @@ const unwatchLocked = watch(
     background-size: contain;
     display: flex;
     flex-direction: column-reverse;
-    align-items: center;
+    align-items: end;
     justify-content: space-between;
+    position: relative;
 }
 
 .player-container .player-img .skill-card {
