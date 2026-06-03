@@ -1,0 +1,657 @@
+:root {
+    --bg: #0f172a;
+    --surface: #1e293b;
+    --surface-light: #334155;
+    --primary: #f97316;
+    --primary-hover: #fb923c;
+    --secondary: #8b5cf6;
+    --accent: #06b6d4;
+    --success: #10b981;
+    --danger: #ef4444;
+    --warning: #f59e0b;
+    --gold: #fbbf24;
+    --text: #f1f5f9;
+    --text-muted: #94a3b8;
+    --border: rgba(148, 163, 184, 0.2);
+    --shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.4);
+    --shadow-lg: 0 20px 40px -10px rgba(0, 0, 0, 0.6);
+    --radius: 1rem;
+    --radius-sm: 0.75rem;
+    --transition: 0.2s ease;
+    --safe-bottom: env(safe-area-inset-bottom, 16px);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, 'PingFang SC', 'Microsoft YaHei', sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    min-height: 100vh;
+    min-height: 100dvh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 1rem;
+    padding-bottom: var(--safe-bottom);
+    line-height: 1.5;
+    -webkit-tap-highlight-color: transparent;
+    user-select: none;
+    -webkit-user-select: none;
+    background: radial-gradient(ellipse at 50% 0%, #1e293b 0%, #0f172a 70%);
+    background-repeat: no-repeat;
+    background-position: center;
+    background-clip: padding-box;
+    background-size: cover;
+    background-image: url('../images/bgm00001.png');
+}
+
+#app {
+    width: 100%;
+    max-width: 500px;
+    min-height: 100vh;
+    min-height: 100dvh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.card {
+    background: var(--surface);
+    border-radius: var(--radius);
+    padding: 1.75rem 1.25rem;
+    box-shadow: var(--shadow);
+    border: 1px solid var(--border);
+    width: 100%;
+    animation: fadeSlideIn 0.3s ease;
+}
+
+@keyframes fadeSlideIn {
+    from {
+        opacity: 0;
+        transform: translateY(12px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.card-header {
+    text-align: center;
+    margin-bottom: 1.5rem;
+}
+
+.card-header h1 {
+    font-size: 1.75rem;
+    font-weight: 800;
+    letter-spacing: -0.02em;
+    background: linear-gradient(135deg, #f97316, #fbbf24);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    margin-bottom: 0.25rem;
+}
+
+.card-header .subtitle {
+    font-size: 0.85rem;
+    color: var(--text-muted);
+    letter-spacing: 0.02em;
+}
+
+.form-group {
+    margin-bottom: 1rem;
+}
+
+.form-group label {
+    display: block;
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: var(--text-muted);
+    margin-bottom: 0.5rem;
+}
+
+.input-field {
+    width: 100%;
+    padding: 0.75rem 1rem;
+    font-size: 1rem;
+    border-radius: var(--radius-sm);
+    border: 2px solid var(--border);
+    background: var(--surface-light);
+    color: var(--text);
+    transition: var(--transition);
+    outline: none;
+    font-family: inherit;
+}
+
+.input-field:focus {
+    border-color: var(--primary);
+    box-shadow: 0 0 0 3px rgba(249, 115, 22, 0.15);
+}
+
+.input-field::placeholder {
+    color: rgba(148, 163, 184, 0.5);
+}
+
+.btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    padding: 0.75rem 1.25rem;
+    font-size: 0.95rem;
+    font-weight: 700;
+    border-radius: var(--radius-sm);
+    border: none;
+    cursor: pointer;
+    transition: all var(--transition);
+    letter-spacing: 0.02em;
+    font-family: inherit;
+    white-space: nowrap;
+    min-height: 48px;
+    -webkit-tap-highlight-color: transparent;
+    position: relative;
+    overflow: hidden;
+}
+
+.btn:active {
+    transform: scale(0.97);
+}
+
+.btn-primary {
+    background: var(--primary);
+    color: #fff;
+    box-shadow: 0 4px 15px rgba(249, 115, 22, 0.35);
+}
+
+.btn-primary:hover {
+    background: var(--primary-hover);
+}
+
+.btn-secondary {
+    background: var(--secondary);
+    color: #fff;
+    box-shadow: 0 4px 15px rgba(139, 92, 246, 0.35);
+}
+
+.btn-success {
+    background: var(--success);
+    color: #fff;
+    box-shadow: 0 4px 15px rgba(16, 185, 129, 0.3);
+}
+
+.btn-outline {
+    background: transparent;
+    border: 2px solid var(--border);
+    color: var(--text);
+}
+
+.btn-outline:hover {
+    border-color: var(--primary);
+    color: var(--primary);
+}
+
+.btn-block {
+    width: 100%;
+}
+
+.btn:disabled {
+    opacity: 0.4;
+    cursor: not-allowed;
+    pointer-events: none;
+    filter: grayscale(30%);
+}
+
+.divider-text {
+    text-align: center;
+    color: var(--text-muted);
+    font-size: 0.8rem;
+    margin: 1rem 0;
+    position: relative;
+}
+
+.divider-text::before,
+.divider-text::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    width: 32%;
+    height: 1px;
+    background: var(--border);
+}
+
+.divider-text::before {
+    left: 0;
+}
+
+.divider-text::after {
+    right: 0;
+}
+
+/* 房间列表 */
+.room-section {
+    margin-top: 0.75rem;
+}
+
+.room-list {
+    max-height: 220px;
+    overflow-y: auto;
+    border-radius: var(--radius-sm);
+    background: var(--surface-light);
+    padding: 0.25rem;
+}
+
+.room-list::-webkit-scrollbar {
+    width: 4px;
+}
+
+.room-list::-webkit-scrollbar-thumb {
+    background: rgba(148, 163, 184, 0.3);
+    border-radius: 2px;
+}
+
+.room-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0.75rem 0.875rem;
+    border-radius: 0.5rem;
+    cursor: pointer;
+    transition: var(--transition);
+    gap: 0.5rem;
+    margin: 0.125rem 0;
+}
+
+.room-item:hover,
+.room-item:active {
+    background: rgba(255, 255, 255, 0.06);
+}
+
+.room-item .room-info {
+    flex: 1;
+    min-width: 0;
+}
+
+.room-item .room-name {
+    font-weight: 600;
+    font-size: 0.9rem;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.room-item .room-id {
+    font-size: 0.7rem;
+    color: var(--text-muted);
+    font-family: 'SF Mono', 'Cascadia Code', 'Consolas', monospace;
+    opacity: 0.7;
+}
+
+.room-item .join-badge {
+    font-size: 0.7rem;
+    background: var(--success);
+    color: #000;
+    padding: 0.25rem 0.625rem;
+    border-radius: 1rem;
+    font-weight: 700;
+    white-space: nowrap;
+}
+
+.room-empty {
+    text-align: center;
+    padding: 1.5rem;
+    color: var(--text-muted);
+    font-size: 0.85rem;
+}
+
+/* 等待页面 */
+.peer-id-box {
+    display: inline-block;
+    background: var(--surface-light);
+    padding: 0.75rem 1.25rem;
+    border-radius: 2rem;
+    font-family: 'SF Mono', 'Cascadia Code', 'Consolas', monospace;
+    font-size: 0.95rem;
+    font-weight: 700;
+    letter-spacing: 0.03em;
+    color: var(--gold);
+    word-break: break-all;
+    border: 2px dashed rgba(251, 191, 36, 0.4);
+    margin: 0.5rem 0;
+    cursor: pointer;
+    transition: var(--transition);
+}
+
+.peer-id-box:hover {
+    border-color: var(--gold);
+    background: rgba(251, 191, 36, 0.08);
+}
+
+.status-indicator {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    margin: 0.75rem 0;
+}
+
+.status-dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    flex-shrink: 0;
+}
+
+.status-dot.online {
+    background: var(--success);
+    box-shadow: 0 0 8px rgba(16, 185, 129, 0.6);
+}
+
+.status-dot.connecting {
+    background: var(--warning);
+    animation: pulse 1.5s infinite;
+}
+
+.status-dot.offline {
+    background: var(--danger);
+}
+
+@keyframes pulse {
+
+    0%,
+    100% {
+        opacity: 1;
+        box-shadow: 0 0 0 0 rgba(245, 158, 11, 0.6);
+    }
+
+    50% {
+        opacity: 0.5;
+        box-shadow: 0 0 0 8px rgba(245, 158, 11, 0);
+    }
+}
+
+.ready-badges {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin: 1rem 0;
+}
+
+.ready-badge {
+    padding: 0.5rem 1rem;
+    border-radius: 2rem;
+    font-size: 0.85rem;
+    font-weight: 600;
+    border: 2px solid var(--border);
+    transition: var(--transition);
+}
+
+.ready-badge.is-ready {
+    border-color: var(--success);
+    background: rgba(16, 185, 129, 0.15);
+    color: var(--success);
+}
+
+/* 游戏页面 */
+.game-layout {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+}
+
+.player-panel {
+    background: var(--surface-light);
+    border-radius: var(--radius);
+    padding: 1rem;
+    border: 2px solid transparent;
+    transition: all 0.3s ease;
+}
+
+.player-panel.active-turn {
+    border-color: var(--gold);
+    box-shadow: 0 0 20px rgba(251, 191, 36, 0.2);
+    animation: glowPulse 2s infinite;
+}
+
+@keyframes glowPulse {
+
+    0%,
+    100% {
+        box-shadow: 0 0 15px rgba(251, 191, 36, 0.15);
+    }
+
+    50% {
+        box-shadow: 0 0 30px rgba(251, 191, 36, 0.4);
+    }
+}
+
+.player-name {
+    font-weight: 700;
+    font-size: 0.95rem;
+    margin-bottom: 0.5rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.turn-badge {
+    font-size: 0.65rem;
+    background: var(--gold);
+    color: #000;
+    padding: 0.15rem 0.5rem;
+    border-radius: 0.75rem;
+    font-weight: 700;
+    animation: bounce 0.6s infinite alternate;
+}
+
+@keyframes bounce {
+    from {
+        transform: translateY(0);
+    }
+
+    to {
+        transform: translateY(-2px);
+    }
+}
+
+.hp-bar {
+    background: rgba(0, 0, 0, 0.4);
+    border-radius: 1rem;
+    height: 16px;
+    overflow: hidden;
+    position: relative;
+}
+
+.hp-fill {
+    height: 100%;
+    border-radius: 1rem;
+    transition: width 0.5s ease;
+}
+
+.hp-fill.high {
+    background: linear-gradient(90deg, #10b981, #059669);
+}
+
+.hp-fill.medium {
+    background: linear-gradient(90deg, #f59e0b, #d97706);
+}
+
+.hp-fill.low {
+    background: linear-gradient(90deg, #ef4444, #dc2626);
+    animation: hpBlink 0.6s infinite;
+}
+
+@keyframes hpBlink {
+
+    0%,
+    100% {
+        opacity: 1;
+    }
+
+    50% {
+        opacity: 0.55;
+    }
+}
+
+.hp-label {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 0.65rem;
+    font-weight: 700;
+    color: #fff;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.6);
+    z-index: 1;
+}
+
+.battle-log {
+    background: var(--surface-light);
+    border-radius: var(--radius-sm);
+    padding: 0.75rem;
+    max-height: 140px;
+    overflow-y: auto;
+    font-size: 0.8rem;
+    line-height: 1.6;
+    border: 1px solid var(--border);
+}
+
+.battle-log::-webkit-scrollbar {
+    width: 3px;
+}
+
+.battle-log::-webkit-scrollbar-thumb {
+    background: rgba(148, 163, 184, 0.25);
+    border-radius: 2px;
+}
+
+.log-entry {
+    padding: 0.2rem 0;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.03);
+    animation: logIn 0.3s ease;
+}
+
+@keyframes logIn {
+    from {
+        opacity: 0;
+        transform: translateY(-4px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.log-entry.damage {
+    color: #f87171;
+}
+
+.log-entry.heal {
+    color: #34d399;
+}
+
+.log-entry.miss {
+    color: #fbbf24;
+}
+
+.log-entry.system {
+    color: #94a3b8;
+    font-style: italic;
+}
+
+.action-row {
+    display: flex;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+}
+
+.action-row .btn {
+    flex: 1;
+    min-width: 70px;
+    font-size: 0.8rem;
+    padding: 0.6rem 0.5rem;
+}
+
+.game-over-panel {
+    text-align: center;
+    padding: 1rem;
+    background: rgba(0, 0, 0, 0.6);
+    border-radius: var(--radius);
+    backdrop-filter: blur(4px);
+}
+
+.win-text {
+    font-size: 1.5rem;
+    font-weight: 800;
+    color: var(--gold);
+}
+
+.lose-text {
+    font-size: 1.5rem;
+    font-weight: 800;
+    color: var(--danger);
+}
+
+.tag {
+    display: inline-block;
+    padding: 0.15rem 0.5rem;
+    border-radius: 0.75rem;
+    font-size: 0.65rem;
+    font-weight: 700;
+}
+
+.tag-you {
+    background: rgba(251, 191, 36, 0.2);
+    color: #fbbf24;
+}
+
+@media (max-width: 380px) {
+    .card {
+        padding: 1.25rem 0.875rem;
+    }
+
+    .card-header h1 {
+        font-size: 1.4rem;
+    }
+
+    .btn {
+        font-size: 0.85rem;
+        min-height: 44px;
+        padding: 0.6rem 1rem;
+    }
+
+    .action-row .btn {
+        font-size: 0.72rem;
+        padding: 0.5rem 0.25rem;
+    }
+
+    .battle-log {
+        max-height: 110px;
+        font-size: 0.72rem;
+    }
+
+    .hp-bar {
+        height: 14px;
+    }
+}
+
+@media (min-width: 768px) {
+    #app {
+        max-width: 540px;
+    }
+
+    .card {
+        padding: 2rem 1.75rem;
+    }
+
+    .battle-log {
+        max-height: 180px;
+    }
+}
