@@ -1,6 +1,6 @@
 import { defineStore } from 'pinia'
 import { ref, reactive, computed } from 'vue'
-import { peerService } from '../services/peerService'
+import { peerService } from '../services/PeerService'
 
 const SKILL_DATA = [
     { id: 1, type: 'doudou', name: '豆豆', energy: 1, beat: [], prevent: [1, 4, 5, 9, 12, 15], limit: -1 },
