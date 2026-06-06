@@ -46,6 +46,7 @@ import { useRouter } from 'vue-router'
 import { useGameStore } from '../stores/gameStore'
 import { roomStorage } from '../services/roomStorage'
 import StatusIndicator from '../components/common/StatusIndicator.vue'
+import { audioService } from '../services/audioService'
 
 const router = useRouter()
 const store = useGameStore()
@@ -90,11 +91,12 @@ watch(() => store.gameStarted, (val) => {
 }, { immediate: true })
 
 onMounted(() => {
+    audioService.playBgm()
     hasNavigated = false
     console.log('⏳ 等待页面挂载')
 
     if (!store.username || !store.peerId) {
-        router.push('/')
+        router.push('/login')
         return
     }
 

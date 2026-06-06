@@ -4,6 +4,11 @@ import { useGameStore } from '../stores/gameStore'
 const routes = [
     {
         path: '/',
+        name: 'Preload',
+        component: () => import('../views/PreloadView.vue')
+    },
+    {
+        path: '/login',
         name: 'Login',
         component: () => import('../views/LoginView.vue')
     },
@@ -29,12 +34,11 @@ const router = createRouter({
     routes
 })
 
-// 路由守卫
 router.beforeEach((to, from) => {
     const store = useGameStore()
-    if (to.path !== '/' && !store.username) {
-        return '/'
-    }
+    // 预加载和登录页不需要登录
+    if (to.path === '/' || to.path === '/login') return true
+    if (!store.username) return '/login'
     return true
 })
 

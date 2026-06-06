@@ -1,0 +1,1 @@
+export const RESOURCE_BASE_URL = `${import.meta.env.BASE_URL}${import.meta.env.VITE_ASSETS_PATH}assets/`

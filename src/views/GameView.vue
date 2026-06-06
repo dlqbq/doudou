@@ -12,24 +12,25 @@
         <GameLog :entries="store.battleLog" />
 
         <RematchRequest v-if="store.gameOver && store.rivalWantsRematch && !store.iWantRematch"
-            :rival-name="store.rivalName" @accept="store.acceptRematch()" @decline="store.declineRematch()" />
+            :rival-name="store.rivalName" @accept="handleAcceptRematch" @decline="handleDeclineRematch" />
 
         <GameResult v-if="store.gameOver" :result="store.gameResult" :rival-name="store.rivalName"
             :self-skill="store.currentSkill" :rival-skill="store.rivalSkill"
             :rematch-status-text="store.rematchStatusText" :rematch-requested="store.iWantRematch"
-            @rematch="store.requestRematch()" @back="handleBackToLobby" />
+            @rematch="handleRequestRematch" @back="handleBackToLobby" />
 
         <SkillPool v-if="!store.gameOver" :skills="store.skills" :current-skill-id="store.currentSkillId"
             :current-skill-name="store.currentSkill?.name" :locked="store.locked" :energy="store.currentEnergy"
             :flower-used="store.flowerUsed" :timeout-count="store.timeoutCount" :rival-skill-id="store.rivalSkillId"
-            @select="store.selectSkill($event.id)" @lock="store.lockSkill()" />
+            @select="handleSkillSelect" @lock="handleLockSkill" />
     </div>
 </template>
 
 <script setup>
-import { computed, ref } from 'vue'
+import { computed, watch, onUnmounted } from 'vue'
 import { useRouter } from 'vue-router'
 import { useGameStore } from '../stores/gameStore'
+import { audioService } from '../services/audioService'
 import StatusBar from '../components/game/StatusBar.vue'
 import BattleStage from '../components/game/BattleStage.vue'
 import SkillPool from '../components/game/SkillPool.vue'
@@ -39,16 +40,42 @@ import GameResult from '../components/game/GameResult.vue'
 
 const router = useRouter()
 const store = useGameStore()
-const battleStageRef = ref(null)
 
 const handleTimeout = () => {
+    audioService.playSfx('timeout')
     store.autoSelectTimeout()
 }
 
+const handleSkillSelect = (skill) => {
+    audioService.playSfx('select')
+    store.selectSkill(skill.id)
+}
+
+const handleLockSkill = () => {
+    audioService.playSfx('lock')
+    store.lockSkill()
+}
+
+const handleRequestRematch = () => store.requestRematch()
+const handleAcceptRematch = () => store.acceptRematch()
+const handleDeclineRematch = () => store.declineRematch()
+
 const handleBackToLobby = () => {
+    audioService.stopBgm()
     store.backToLobby()
     router.push('/lobby')
 }
+
+watch(() => store.gameResult, (val) => {
+    if (val === 'win') audioService.playSfx('win')
+    else if (val === 'lose') audioService.playSfx('lose')
+})
+
+watch(() => store.rivalSkillId, (val) => {
+    if (store.locked && val > 0 && store.currentSkillId > 0) {
+        audioService.playSfx('magic')
+    }
+})
 
 const statusText = computed(() => {
     if (store.gameOver) {
@@ -60,6 +87,10 @@ const statusText = computed(() => {
     if (store.locked) return '已锁定，等待对手'
     if (store.currentSkill) return '已选择，点击锁定'
     return '请选择技能卡牌'
+})
+
+onUnmounted(() => {
+    audioService.stopBgm()
 })
 </script>
 

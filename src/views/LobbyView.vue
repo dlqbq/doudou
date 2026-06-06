@@ -29,6 +29,7 @@ import { useGameStore } from '../stores/gameStore'
 import { roomStorage } from '../services/roomStorage'
 import JoinForm from '../components/lobby/JoinForm.vue'
 import RoomList from '../components/lobby/RoomList.vue'
+import { audioService } from '../services/audioService'
 
 const router = useRouter()
 const store = useGameStore()
@@ -126,8 +127,10 @@ const handleJoinRoom = (room) => {
 }
 
 onMounted(() => {
+    audioService.init()
+    audioService.playBgm()
     if (!store.username) {
-        router.push('/')
+        router.push('/login')
         return
     }
     refreshRooms()

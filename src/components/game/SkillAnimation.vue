@@ -1,22 +1,21 @@
 <script setup>
-import { computed, ref, watch } from 'vue'
+import { computed, ref, watch, inject } from 'vue'
 
 const props = defineProps({
     skillType: { type: String, default: 'stand' },
     role: { type: String, default: 'wukong' },
     play: { type: Boolean, default: false },
-    baseUrl: { type: String, default: 'assets/' },
     reverse: { type: Boolean, default: false }
 })
-const baseUrl = `${import.meta.env.BASE_URL}${import.meta.env.VITE_ASSETS_PATH}`
+const baseUrl = inject('resourceBaseUrl', '/assets/')
 
 // 🔑 角色站立图
 const roleBg = computed(() => ({
-    backgroundImage: `url(${baseUrl}${props.baseUrl}images/${props.role}_stand.gif)`
+    backgroundImage: `url(${baseUrl}images/${props.role}_stand.gif)`
 }))
 
 // 🔑 技能 GIF
-const skillGifSrc = computed(() => `${baseUrl}${props.baseUrl}images/${props.role}_${props.skillType}.gif`)
+const skillGifSrc = computed(() => `${baseUrl}images/${props.role}_${props.skillType}.gif`)
 
 // 🔑 stand 类型不显示 GIF
 const isStand = computed(() => props.skillType === 'stand')
