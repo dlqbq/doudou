@@ -91,7 +91,6 @@ watch(() => store.gameStarted, (val) => {
 }, { immediate: true })
 
 onMounted(() => {
-    audioService.playBgm()
     hasNavigated = false
     console.log('⏳ 等待页面挂载')
 

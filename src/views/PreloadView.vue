@@ -1,7 +1,7 @@
 <template>
     <div class="preload-container">
         <div class="preload-card">
-            <h1 class="title">⚔️ 回合对战</h1>
+            <h1 class="title">⚔️ 豆豆斗斗</h1>
             <div class="progress-bar">
                 <div class="progress-fill" :style="{ width: progress + '%' }"></div>
             </div>

@@ -1,7 +1,7 @@
 <template>
     <div class="card">
         <div class="card-header">
-            <h1>⚔️ 回合对战</h1>
+            <h1>⚔️ 豆豆斗斗</h1>
             <p class="subtitle">P2P实时联机 · 支持手机&电脑</p>
         </div>
         <div class="form-group">
@@ -18,12 +18,14 @@
 import { ref, onMounted } from 'vue'
 import { useRouter } from 'vue-router'
 import { useGameStore } from '../stores/gameStore'
+import { audioService } from '../services/audioService'
 
 const router = useRouter()
 const store = useGameStore()
 const nameInput = ref('')
 
 const login = () => {
+    audioService.playBgm();
     const name = nameInput.value.trim()
     if (!name) return
     store.username = name

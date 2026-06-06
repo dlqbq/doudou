@@ -127,8 +127,6 @@ const handleJoinRoom = (room) => {
 }
 
 onMounted(() => {
-    audioService.init()
-    audioService.playBgm()
     if (!store.username) {
         router.push('/login')
         return
